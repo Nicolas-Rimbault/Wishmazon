@@ -1,5 +1,6 @@
 package com.example.apiprojet.service;
 
+import com.example.apiprojet.api.controller.Dbconnect;
 import com.example.apiprojet.api.model.Article;
 import org.springframework.stereotype.Service;
 
@@ -19,38 +20,17 @@ public class ArticleService {
 
     public ArticleService(){
         articleslist = new ArrayList<>();
-        String url = "jdbc:mariadb://localhost:3307/projet";
-        String username = "root";
-        String password = "";
 
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url,username,password);
-            System.out.println("Connected");
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM article");
-
-            while (resultSet.next()){
-                Article article = new Article(
-                        resultSet.getInt("Article_ID"),
-                        resultSet.getString("libelle"),
-                        resultSet.getString("prix"),
-                        resultSet.getString("description"),
-                        resultSet.getString("categorie"),
-                        resultSet.getString("poid"),
-                        resultSet.getString("longueur"),
-                        resultSet.getString("largeur"),
-                        resultSet.getString("hauteur")
-                );
-                articleslist.add(article);
+         Dbconnect dbconnect = new Dbconnect("jdbc:mariadb://localhost:3307/projet","root","");
+            try {
+                ResultSet resultSet = dbconnect.getStatement().executeQuery("SELECT * FROM article");
+                while (resultSet.next()) {
+                    articleslist.add(new Article(resultSet.getInt("Article_ID"), resultSet.getString("Libelle"), resultSet.getString("Prix"), resultSet.getString("Description"), resultSet.getString("Categorie"), resultSet.getString("Poid"), resultSet.getString("Longueur"), resultSet.getString("Largeur"), resultSet.getString("Hauteur")));
+                }
             }
-
-            connection.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
 
     }
 
