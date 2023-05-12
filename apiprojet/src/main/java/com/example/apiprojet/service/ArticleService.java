@@ -25,7 +25,7 @@ public class ArticleService {
             try {
                 ResultSet resultSet = dbconnect.getStatement().executeQuery("SELECT * FROM article");
                 while (resultSet.next()) {
-                    articleslist.add(new Article(resultSet.getInt("Article_ID"), resultSet.getString("Libelle"), resultSet.getString("Prix"), resultSet.getString("Description"), resultSet.getString("Categorie"), resultSet.getString("Poid"), resultSet.getString("Longueur"), resultSet.getString("Largeur"), resultSet.getString("Hauteur")));
+                    articleslist.add(new Article(resultSet.getInt("Article_ID"), resultSet.getString("Libelle"), resultSet.getString("Prix"), resultSet.getString("Description"), resultSet.getString("Categorie"), resultSet.getString("Disponibilite"), resultSet.getString("Poid"), resultSet.getString("Longueur"), resultSet.getString("Largeur"), resultSet.getString("Hauteur")));
                 }
             }
             catch (Exception e) {

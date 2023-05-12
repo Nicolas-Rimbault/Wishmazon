@@ -5,6 +5,7 @@ import com.example.apiprojet.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.mapping.InsertOnlyProperty;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +35,15 @@ public class ArticleController {
         return articleService.getArticles();
     }
 
+    @PostMapping("/POSTarticle")
+    public void addArticle(@RequestParam String Libelle, @RequestParam String Prix, @RequestParam String Description, @RequestParam String Categorie,@RequestParam String Disponibilite ,@RequestParam String Poid, @RequestParam String Longueur, @RequestParam String Largeur, @RequestParam String Hauteur) {
+        Dbconnect dbconnect = new Dbconnect("jdbc:mariadb://localhost:3307/projet","root","");
+        try {
+            dbconnect.getStatement().executeUpdate("INSERT INTO article (Libelle, Prix, Description, Categorie, Disponibilite, Poid, Longueur, Largeur, Hauteur) VALUES ('"+Libelle+"','"+Prix+"','"+Description+"','"+Categorie+"','"+Disponibilite+"','"+Poid+"','"+Longueur+"','"+Largeur+"','"+Hauteur+"')");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

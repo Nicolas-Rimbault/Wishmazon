@@ -19,7 +19,7 @@ public class CommandeService {
         try {
             ResultSet resultSet = dbconnect.getStatement().executeQuery("SELECT * FROM commandes");
             while (resultSet.next()) {
-                commandeList.add(new Commande(resultSet.getInt("ID_commande"), resultSet.getString("NUM_Commande"), resultSet.getString("Date"), resultSet.getString("Statut")));
+                commandeList.add(new Commande(resultSet.getString("NUM_Commande"), resultSet.getString("Date"), resultSet.getString("Statut")));
             }
         }
         catch (Exception e) {

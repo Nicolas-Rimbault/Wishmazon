@@ -6,19 +6,13 @@ public class Commande {
     private String Date;
     private String Statut;
 
-    public Commande(int id_commande, String Num_commande, String Date, String Statut) {
-        this.id_commande = id_commande;
+    public Commande(String Num_commande, String Date, String Statut) {
+
         this.Num_commande = Num_commande;
         this.Date = Date;
         this.Statut = Statut;
     }
 
-    public int getId_commande() {
-        return id_commande;
-    }
-    public void setId_commande(int id_commande) {
-        this.id_commande = id_commande;
-    }
     public String getNum_commande() {
         return Num_commande;
     }

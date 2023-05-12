@@ -5,20 +5,10 @@ import com.example.apiprojet.service.ArticleService;
 import com.example.apiprojet.service.CommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.mapping.InsertOnlyProperty;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
-
-
-
-
-
-
 @RestController
 public class CommandeController {
     private final CommandeService CommandeService;
@@ -43,5 +33,17 @@ public class CommandeController {
             e.printStackTrace();
         }
     }
-
+    @PutMapping("/updatecommande")
+    public void updateCommande(@RequestParam String Num_commande,@RequestParam String Statut) {
+        Dbconnect dbconnect = new Dbconnect("jdbc:mariadb://localhost:3307/projet","root","");
+        try {
+            dbconnect.getStatement().executeUpdate("UPDATE commandes SET Statut = '"+Statut+"' WHERE Num_commande = '"+Num_commande+"'");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+

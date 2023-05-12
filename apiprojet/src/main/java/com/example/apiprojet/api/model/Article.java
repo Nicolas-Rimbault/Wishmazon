@@ -13,12 +13,13 @@ public class Article {
 
     private String Hauteur;
 
-public Article(int id, String Libelle, String Prix, String Description, String Catégorie, String Poid, String Longueur, String Largeur, String Hauteur) {
+public Article(int id, String Libelle, String Prix, String Description, String Catégorie, String Disponibilite, String Poid, String Longueur, String Largeur, String Hauteur) {
     this.id = id;
     this.Libelle = Libelle;
     this.Prix = Prix;
     this.Description = Description;
     this.Catégorie = Catégorie;
+    this.Disponibilite = Disponibilite;
     this.Poid = Poid;
     this.Longueur = Longueur;
     this.Largeur = Largeur;
@@ -59,6 +60,12 @@ public void setCatégorie(String Catégorie) {
     this.Catégorie = Catégorie;
 }
 
+public String getDisponibilite() {
+    return Disponibilite;
+}
+public void setDisponibilite(String Disponibilite) {
+    this.Disponibilite = Disponibilite;
+}
 public String getPoid() {
     return Poid;
 }
