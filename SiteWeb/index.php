@@ -1,9 +1,7 @@
 <?php include 'template/header.php';
 
-$url = 'http://localhost:8080/articles'; // path to your JSON file
-$data = file_get_contents($url); // put the contents of the file into a variable
-$characters = json_decode($data, true);
-
+include 'Article.php';
+$characters = routeArticles();
 //echo $characters[0]['libelle'];
     ?>
 

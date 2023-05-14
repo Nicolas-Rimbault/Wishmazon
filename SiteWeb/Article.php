@@ -1,79 +1,25 @@
 <?php 
-	
-	function getDatabaseConnexion() {
-		try {
-		    $user = "root";
-			$pass = "";
-			$pdo = new PDO('mysql:host=localhost;dbname=wishmazon', $user, $pass);
-			 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			return $pdo;
-			
-		} catch (PDOException $e) {
-		    print "Erreur !: " . $e->getMessage() . "<br/>";
-		    die();
-		}
-	}
 
-	
-	// récupere tous les users
-	function getAllUsers() {
-		$con = getDatabaseConnexion();
-		$requete = 'SELECT * from utilisateurs';
-		$rows = $con->query($requete);
-		return $rows;
-	}
+function routeArticles(){
+    $url = 'http://localhost:8080/articles'; // path to your JSON file
+    $data = file_get_contents($url); // put the contents of the file into a variable
+    $characters = json_decode($data, true); 
+    return $characters;  
+}
 
-	// creer un user
-	function createUser($nom, $prenom, $age, $adresse) {
-		try {
-			$con = getDatabaseConnexion();
-			$sql = "INSERT INTO utilisateurs (nom, prenom, age, adresse) 
-					VALUES ('$nom', '$prenom', '$age' ,'$adresse')";
-	    	$con->exec($sql);
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}
-
-	//recupere un user
-	function readUser($id) {
-		$con = getDatabaseConnexion();
-		$requete = "SELECT * from utilisateurs where id = '$id' ";
-		$stmt = $con->query($requete);
-		$row = $stmt->fetchAll();
-		if (!empty($row)) {
-			return $row[0];
-		}
-		
-	}
-
-	//met à jour le user
-	function updateUser($id, $nom, $prenom, $age, $adresse) {
-		try {
-			$con = getDatabaseConnexion();
-			$requete = "UPDATE utilisateurs set 
-						nom = '$nom',
-						prenom = '$prenom',
-						age = '$age',
-						adresse = '$adresse' 
-						where id = '$id' ";
-			$stmt = $con->query($requete);
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}
-
-	// suprime un user
-	function deleteUser($id) {
-		try {
-			$con = getDatabaseConnexion();
-			$requete = "DELETE from utilisateurs where id = '$id' ";
-			$stmt = $con->query($requete);
-		}
-	    catch(PDOException $e) {
-	    	echo $sql . "<br>" . $e->getMessage();
-	    }
-	}
+function routeArticle(){
+    if (isset($_POST['identifiant'])) {
+        $id = $_POST['identifiant'];
+        //echo $id;
+        $url = "http://localhost:8080/article?id=$id";
+        $data = file_get_contents($url);
+        $character = json_decode($data, true);
+        return $character;
+    }
+    else
+    {
+    echo "ca marche pas ;-(";
+    }
+}
+ 
 ?>

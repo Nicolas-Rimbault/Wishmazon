@@ -1,17 +1,6 @@
 <?php include 'template/header.php';
-
-if (isset($_POST['identifiant'])) {
-    $id = $_POST['identifiant'];
-    echo $id;
-
-    $url = "http://localhost:8080/article?id=$id";
-    $data = file_get_contents($url);
-    $character = json_decode($data, true);
-}
-else
-{
-echo "ca marche pas ;-(";
-}
+include 'Article.php';
+$character = routeArticle();
 ?>
 
 <div class="container">
