@@ -3,8 +3,8 @@
 function routeArticles(){
     $url = 'http://localhost:8080/articles'; // path to your JSON file
     $data = file_get_contents($url); // put the contents of the file into a variable
-    $characters = json_decode($data, true); 
-    return $characters;  
+    $articles = json_decode($data, true); 
+    return $articles;  
 }
 
 function routeArticle(){
@@ -13,8 +13,8 @@ function routeArticle(){
         //echo $id;
         $url = "http://localhost:8080/article?id=$id";
         $data = file_get_contents($url);
-        $character = json_decode($data, true);
-        return $character;
+        $article = json_decode($data, true);
+        return $article;
     }
     else
     {
